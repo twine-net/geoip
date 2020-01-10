@@ -28,7 +28,7 @@ class GeoIPUpdater
     {
         $this->config = $config;
 
-        $this->guzzle = $guzzle ?? new GuzzleClient();
+        $this->guzzle = $guzzle ?: new GuzzleClient();
     }
 
     /**

@@ -34,7 +34,7 @@ class GeoIPManager
      */
     public function getDriver($driver = null)
     {
-        $driver = $driver ?? Arr::get($this->config, 'driver', '');
+        $driver = $driver ?: Arr::get($this->config, 'driver', '');
 
         $method = 'create'.ucfirst(Str::camel($driver)).'Driver';
 
