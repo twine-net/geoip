@@ -32,7 +32,11 @@ class GeoIPServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/geoip.php', 'geoip');
+        if (method_exists($this, 'mergeConfigFrom')) {
+            $this->mergeConfigFrom(__DIR__.'/../config/geoip.php', 'geoip');
+        } else {
+            $this->app->config->package('pulkitjalan/geoip', realpath(__DIR__.'/config'), 'geoip');
+        }
 
         $this->registerGeoIP();
 
