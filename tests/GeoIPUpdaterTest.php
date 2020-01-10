@@ -14,7 +14,7 @@ use PulkitJalan\GeoIP\Exceptions\InvalidCredentialsException;
 
 class GeoIPUpdaterTest extends TestCase
 {
-    public function tearDown(): void
+    public function tearDown()
     {
         Mockery::close();
     }

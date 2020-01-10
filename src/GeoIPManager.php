@@ -32,7 +32,7 @@ class GeoIPManager
      *
      * @return \PulkitJalan\GeoIP\AbstractGeoIPDriver
      */
-    public function getDriver($driver = null): AbstractGeoIPDriver
+    public function getDriver($driver = null)
     {
         $driver = $driver ?? Arr::get($this->config, 'driver', '');
 
@@ -50,7 +50,7 @@ class GeoIPManager
      *
      * @return \PulkitJalan\GeoIP\IpStackDriver
      */
-    protected function createIpStackDriver(array $data): IpStackDriver
+    protected function createIpStackDriver(array $data)
     {
         return new IpStackDriver($data);
     }
@@ -60,7 +60,7 @@ class GeoIPManager
      *
      * @return \PulkitJalan\GeoIP\IPApiDriver
      */
-    protected function createIpApiDriver(array $data): IPApiDriver
+    protected function createIpApiDriver(array $data)
     {
         return new IPApiDriver($data);
     }
@@ -70,7 +70,7 @@ class GeoIPManager
      *
      * @return \PulkitJalan\GeoIP\MaxmindDriver
      */
-    protected function createMaxmindDatabaseDriver(array $data): MaxmindDatabaseDriver
+    protected function createMaxmindDatabaseDriver(array $data)
     {
         return new MaxmindDatabaseDriver($data);
     }
@@ -80,7 +80,7 @@ class GeoIPManager
      *
      * @return \PulkitJalan\GeoIP\MaxmindDriver
      */
-    protected function createMaxmindApiDriver(array $data): MaxmindApiDriver
+    protected function createMaxmindApiDriver(array $data)
     {
         return new MaxmindApiDriver($data);
     }
@@ -90,7 +90,7 @@ class GeoIPManager
      *
      * @return \PulkitJalan\GeoIP\TelizeDriver
      */
-    protected function createTelizeDriver(array $data): TelizeDriver
+    protected function createTelizeDriver(array $data)
     {
         return new TelizeDriver($data);
     }
