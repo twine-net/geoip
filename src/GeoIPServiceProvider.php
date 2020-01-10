@@ -48,9 +48,15 @@ class GeoIPServiceProvider extends ServiceProvider
      */
     protected function registerGeoIP()
     {
-        $this->app->singleton('PulkitJalan\GeoIP\GeoIP', function ($app) {
-            return new GeoIP($app['config']['geoip']);
-        });
+        if ($this->isLaravel4()) {
+            $this->app['geoip'] = $this->app->share(function ($app) {
+                return new GeoIP($app->config->get('geoip::config'));
+            });
+        } else {
+            $this->app->singleton('PulkitJalan\GeoIP\GeoIP', function ($app) {
+                return new GeoIP($app['config']['geoip']);
+            });
+        }
     }
 
     /**
@@ -58,9 +64,27 @@ class GeoIPServiceProvider extends ServiceProvider
      */
     protected function registerUpdateCommand()
     {
-        $this->app->singleton('PulkitJalan\GeoIP\Console\UpdateCommand', function ($app) {
-            return new UpdateCommand($app['config']['geoip']);
-        });
+        if ($this->isLaravel4()) {
+            $this->app['command.geoip.update'] = $this->app->share(function ($app) {
+                return new UpdateCommand($app->config->get('geoip::config'));
+            });
+
+            $this->commands(['command.geoip.update']);
+        } else {
+            $this->app->singleton('PulkitJalan\GeoIP\Console\UpdateCommand', function ($app) {
+                return new UpdateCommand($app['config']['geoip']);
+            });
+        }
+    }
+
+    /**
+     * Laravel Version Check
+     *
+     * @return bool
+     */
+    protected function isLaravel4()
+    {
+        return version_compare(get_class($this->app) . '::VERSION', '5', '<');
     }
 
     /**
