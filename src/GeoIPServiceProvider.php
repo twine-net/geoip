@@ -84,7 +84,11 @@ class GeoIPServiceProvider extends ServiceProvider
      */
     protected function isLaravel4()
     {
-        return version_compare(get_class($this->app) . '::VERSION', '5', '<');
+        if (method_exists($this->app, 'version')) {
+            return version_compare($this->app->version(), '5', '<');
+        }
+
+        return true;
     }
 
     /**
