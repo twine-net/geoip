@@ -1,5 +1,5 @@
 {
-    "name": "pulkitjalan/geoip",
+    "name": "twine-net/geoip",
     "description": "Geoip Wrapper with Laravel Support",
     "homepage": "https://github.com/pulkitjalan/geoip",
     "keywords": [
